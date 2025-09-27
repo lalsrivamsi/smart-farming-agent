@@ -74,7 +74,7 @@ def get_answer_from_gemini(question,img=None):
 
     # Send a message to the bot
     if not gemini_chat:
-        gemini_chat = build_gemini_model()
+        build_gemini_model()
     
     else:
         api_keys_list = [os.environ.get("GOOGLE_API_KEY_1"),os.environ.get("GOOGLE_API_KEY_2")]

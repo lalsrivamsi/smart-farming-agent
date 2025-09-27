@@ -35,7 +35,7 @@ def predict_crop(list):
     index = model.predict([list])[0]
     pred_crop = label_dict[index]
     return f"""Based on the Given data I predicted the '{pred_crop}' is suitable crop to be Yield for the ground.\n
-    I can Predict the following crops {",".join(list(label_dict.values()))}
+    I can Predict the following crops {", ".join(label_dict.values().mapping.values())}
     """
 
 if __name__ == "__main__":  
