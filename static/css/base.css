@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+main {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    /* height: 10vh; */
+    background-image: linear-gradient(120deg, pink, skyblue, lightcyan);
+}
+
+h1 {
+    font-size: 3rem;
+    /* font-family: "shikamaru"; */
+    text-align: center;
+    color: transparent;
+    background-image: url("../images/indian-farmer.jpg");
+    background-position: center;
+    background-clip: text;
+    background-size: contain;
+}
+
+.main-section {
+    min-height: 75vh;
+    max-height: 75vh;
+    overflow-y: auto;
+    background-color: lightgrey;
+}
+
+.chat-box {
+    height: 100%;
+    padding: 5px;
+    overflow-y: auto;
+}
+
+.inputs-section {
+    display: grid;
+    grid-template-columns: 75% 20%;
+    column-gap: 5%;
+    margin: 10px;
+    align-content: center;
+}
+
+.text-based {
+    background-color: lightcyan;
+}
+
+.outer-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.outer-card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -3px;
+    border-radius: 8px;
+    transform: scale(1.01, 1.01);
+    opacity: 0;
+    background-image: conic-gradient(from var(--angle), pink, grey, black, skyblue, yellow);
+    z-index: -1;
+    animation: spinGradient 3s linear infinite;
+}
+
+.outer-card:focus-within::before {
+    opacity: 1;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border-radius: 8px;
+    background-color: wheat;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#ai-image-reset {
+    border-radius: 50%;
+    padding: 3px;
+    outline: 1px solid black;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+}
+
+#ai-image-reset:hover {
+    background-color: red;
+    outline: 1px dashed black;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spinGradient {
+    0% {
+        --angle: 0deg;
+    }
+
+    100% {
+        --angle: 360deg;
+    }
+}
+
+#modal {
+    padding-left: 5px;
+}
+
+footer {
+    text-align: center;
+}
+
+
+@media screen and (max-width:1024px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        width: 100%;
+    }
+
+    .text-based {
+        grid-template-columns: 100%;
+        row-gap: 10px;
+    }
+
+    .inputs-section {
+        grid-template-columns: 100%;
+        row-gap: 5px;
+    }
+}

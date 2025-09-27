@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI</title>
+
+    <!-- daisy UI-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- htmx -->
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js"
+        integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ"
+        crossorigin="anonymous"></script>
+
+    <!-- Day js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>AGRICULTURE AGENTIC AI</h1>
+        </header>
+        <br>
+        <dialog id="my_modal_3" class="modal">
+            <div class="modal-box">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+                <br>
+                <br>
+                <div id="modal-form"></div>
+            </div>
+        </dialog>
+        <section class="main-section">
+            <div class="chat-box" id="chat">
+                <div class="chat chat-start" style="padding-right:50%;">
+                    <div class="chat-image avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Tailwind CSS chat bubble component" src="{% static 'images/robot.webp' %}" />
+                        </div>
+                    </div>
+                    <div class="chat-header">
+                        AI
+                    </div>
+                    <div class="chat-bubble" style="text-align: justify;">Hello, How can i Help You?</div>
+                    <div class="chat-footer opacity-50">
+                        <button onclick="speak(this)" class="sound">
+                            <img width="15" height="15" src="{% static 'images/icons8-speaker-20.png' %}" alt="speaker"
+                                class="speaker-img" data-mute="{% static 'images/icons8-mute-20.png' %}"
+                                data-speaker="{% static 'images/icons8-speaker-20.png' %}" />
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <hr>
+        <section class="inputs-section">
+            <form hx-post="{% url 'search' %}" hx-target="#chat" hx-swap="beforeend" class="text-based"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <div class="outer-card">
+                        <textarea name="query" id="promt" placeholder="Enter promt"></textarea>
+                    </div>
+                </div>
+                <input type="file" class="file-input file-input-accent" id="ai-promt-image" accept="image/*"
+                    name="image" onchange="checkAIPromtImage(this)" />
+                <button type="reset" id="ai-image-reset" onclick="resetAIImage(this.previousElementSibling)">X</button>
+                <input type="submit" hidden id="submit">
+            </form>
+            <div>
+                <select class="select select-accent" name="modal_no" id="modal" hx-get="{% url 'ml_modals'%}"
+                    hx-target="#modal-form" hx-swap="innerHTML" hx-trigger="change"
+                    hx-on:success="my_modal_3.showModal()">
+                    <option selected value="0">Pick a Model</option>
+                    <option value="1">crop predict</option>
+                </select>
+            </div>
+        </section>
+
+        <hr>
+
+        <footer>Thanks for visiting us 😊</footer>
+
+
+    </main>
+
+
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+
+</html>

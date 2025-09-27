@@ -1,0 +1,86 @@
+<form hx-get="{% url 'predict_crop' %}" hx-target="#chat" hx-swap="beforeend" id="predict-crop-form">
+    <label class="floating-label">
+        <span>Enter Nitrogen Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="Nitrogen" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <label class="floating-label">
+        <span>Enter Phosphorous Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="Phosphorous" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <label class="floating-label">
+        <span>Enter Potassium Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="Potassium" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <label class="floating-label">
+        <span>Enter Temperature Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="Temperature" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <label class="floating-label">
+        <span>Enter Humidity Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="Humidity" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <label class="floating-label">
+        <span>Enter PH Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="PH" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <label class="floating-label">
+        <span>Enter Rainfall Amount:</span>
+        <input type="number" class="input validator" required min="0" step="any" name="Rainfall" />
+        <p class="validator-hint">Must be greater than -1</p>
+    </label>
+    <hr>
+    <div class="buttons">
+        <button class="btn btn-error" type="reset">Reset</button>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </div>
+</form>
+
+<style>
+    #predict-crop-form {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    #predict-crop-form .buttons button {
+        width: 25%;
+    }
+
+    #predict-crop-form .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        column-gap: 10px;
+        margin: 2px 0px;
+    }
+
+    label {
+        width: 75%;
+        margin: 2.5px auto;
+    }
+</style>
+
+<script>
+
+    document.getElementById("predict-crop-form").addEventListener("submit", (ev) => {
+        let para = "Predict the crop\n";
+
+        document.getElementById("predict-crop-form").querySelectorAll("input").forEach((ele) => {
+            para += `${ele.name}: ${ele.value}\n`
+        })
+
+        chatEle.appendChild(makeNewChatRow(para, null));
+        chatEle.parentElement.scrollTo({
+            top: chatEle.scrollHeight,
+            behavior: "smooth"
+        });
+
+        document.getElementById("my_modal_3").close();
+    })
+</script>
